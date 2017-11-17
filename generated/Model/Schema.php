@@ -124,6 +124,10 @@ class Schema
      * @var mixed
      */
     protected $example;
+    /**
+     * @var bool
+     */
+    protected $nullable;
 
     /**
      * @return string
@@ -723,5 +727,21 @@ class Schema
         $this->example = $example;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNullable()
+    {
+        return $this->nullable;
+    }
+
+    /**
+     * @param bool $nullable
+     */
+    public function setNullable($nullable)
+    {
+        $this->nullable = $nullable;
     }
 }
