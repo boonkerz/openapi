@@ -48,7 +48,7 @@ class SchemaNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (property_exists($data, 'objectProperty')) {
             $object->setObjectProperty($this->denormalizer->denormalize($data->{'objectProperty'}, 'Joli\\Jane\\OpenApi\\Tests\\Expected\\Model\\SchemaObjectProperty', 'json', $context));
         }
-        if (property_exists($data, 'objectPropertyMulti')) {
+        if (property_exists($data, 'objectPropertyMulti') && is_object($data->{'objectPropertyMulti'})) {
             $object->setObjectPropertyMulti($this->denormalizer->denormalize($data->{'objectPropertyMulti'}, 'Joli\\Jane\\OpenApi\\Tests\\Expected\\Model\\SchemaObjectPropertyMulti', 'json', $context));
         }
         if (property_exists($data, 'objectRefProperty')) {
@@ -64,9 +64,7 @@ class SchemaNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (null !== $object->getObjectProperty()) {
             $data->{'objectProperty'} = $this->normalizer->normalize($object->getObjectProperty(), 'json', $context);
         }
-        if (null !== $object->getObjectPropertyMulti()) {
-            $data->{'objectPropertyMulti'} = $this->normalizer->normalize($object->getObjectPropertyMulti(), 'json', $context);
-        }
+        $data->{'objectPropertyMulti'} = $this->normalizer->normalize($object->getObjectPropertyMulti(), 'json', $context);
         if (null !== $object->getObjectRefProperty()) {
             $data->{'objectRefProperty'} = $this->normalizer->normalize($object->getObjectRefProperty(), 'json', $context);
         }
